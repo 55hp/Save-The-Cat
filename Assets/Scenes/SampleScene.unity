@@ -314,7 +314,7 @@ MonoBehaviour:
   - animal
   - orange
   state: elevated
-  reachState: ground
+  reachState: elevated
 --- !u!58 &122197208
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3240,7 +3240,7 @@ MonoBehaviour:
   walkSpeed: 3
   climbSpeed: 2
   heldSlot: {fileID: 654773838}
-  heldObject: {fileID: 654773836}
+  heldObject: {fileID: 0}
   isElevated: 0
 --- !u!4 &1897803273
 Transform:
