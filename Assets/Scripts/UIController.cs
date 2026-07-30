@@ -7,15 +7,13 @@ public class UIController : MonoBehaviour
     public InputField inputField;
     public Button sendButton;
     public Text feedbackText;
+    public GameFlow gameFlow; // collega SOLO sulla UI del Livello 1, lascia vuoto sul Livello 2
 
     void Start()
     {
         sendButton.onClick.AddListener(OnSend);
     }
 
-    /// <summary>
-    /// Called when the send button is clicked. It retrieves the player's input, checks if it's valid, disables the send button to prevent multiple submissions, and starts the coroutine to handle sending the input to the AI and processing the response.
-    /// </summary>
     void OnSend()
     {
         string playerText = inputField.text;
@@ -25,11 +23,6 @@ public class UIController : MonoBehaviour
         StartCoroutine(SendFlow(playerText));
     }
 
-    /// <summary>
-    /// Coroutine that handles the flow of sending the player's input to the AI, receiving the response, parsing it, and executing any commands. It also manages UI feedback and button interactivity.
-    /// </summary>
-    /// <param name="playerText"></param>
-    /// <returns></returns>
     IEnumerator SendFlow(string playerText)
     {
         string system = PromptBuilder.BuildSystemPrompt();
@@ -70,6 +63,17 @@ public class UIController : MonoBehaviour
             Debug.Log("Esito comandi: " + success + " (" + reason + ")");
         });
 
+        CheckWinCondition();
         sendButton.interactable = true;
+    }
+
+    void CheckWinCondition()
+    {
+        var cat = GameManager.I.FindObject("cat");
+        if (cat != null && cat.state == "held")
+        {
+            Debug.Log("Livello completato!");
+            gameFlow?.StartLevel2(); // sul Livello 2, gameFlow resta null: mostra qui uno schermo di fine gioco
+        }
     }
 }
