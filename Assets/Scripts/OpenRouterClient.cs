@@ -10,8 +10,11 @@ public class OpenRouterClient : MonoBehaviour
 
     const string URL = "https://openrouter.ai/api/v1/chat/completions";
 
-    public string model = "anthropic/claude-haiku-4-5";
+    public string model = "anthropic/claude-haiku-4.5";
 
+    // OpenRouterClient.cs
+    public int maxTokens = 500; // margine ampio per il nostro JSON, lontanissimo dal tetto teorico del modello
+    public string apiKey; // vuoto di default, lo popola il player a runtime
     void Awake() { I = this; }
 
     /// <summary>
@@ -24,6 +27,7 @@ public class OpenRouterClient : MonoBehaviour
     /// <returns></returns>
     public IEnumerator SendPrompt(string systemPrompt, string userPrompt, Action<string> onDone, Action<string> onError)
     {
+        
         var payload = new ORRequest
         {
             model = model,
@@ -31,7 +35,8 @@ public class OpenRouterClient : MonoBehaviour
             {
                 new ORMessage { role = "system", content = systemPrompt },
                 new ORMessage { role = "user", content = userPrompt }
-            }
+            },
+            max_tokens = maxTokens
         };
 
         string json = JsonUtility.ToJson(payload);
@@ -41,7 +46,7 @@ public class OpenRouterClient : MonoBehaviour
             req.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
             req.downloadHandler = new DownloadHandlerBuffer();
             req.SetRequestHeader("Content-Type", "application/json");
-            req.SetRequestHeader("Authorization", "Bearer " + ApiKeyContainer.ApiKey);
+            req.SetRequestHeader("Authorization", "Bearer " + apiKey);
 
             yield return req.SendWebRequest();
 

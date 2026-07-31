@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    public InputField keyInputField;
     public InputField inputField;
     public Button sendButton;
     public Text feedbackText;
@@ -16,6 +17,7 @@ public class UIController : MonoBehaviour
 
     void OnSend()
     {
+        OpenRouterClient.I.apiKey = keyInputField.text;
         string playerText = inputField.text;
         if (string.IsNullOrWhiteSpace(playerText)) return;
 
@@ -36,6 +38,7 @@ public class UIController : MonoBehaviour
 
         if (aiError != null)
         {
+            Debug.LogError("Errore OpenRouter: " + aiError); // NUOVO
             feedbackText.text = "Il gatto si distrae per un attimo... riprova!";
             sendButton.interactable = true;
             yield break;
@@ -49,6 +52,7 @@ public class UIController : MonoBehaviour
         }
         catch
         {
+            Debug.LogError("Errore parsing JSON. Risposta raw: " + clean); // NUOVO
             feedbackText.text = "Il gatto ti guarda confuso.";
             sendButton.interactable = true;
             yield break;

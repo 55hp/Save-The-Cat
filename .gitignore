@@ -40,6 +40,10 @@ sysinfo.txt
 # Asset a pagamento — MAI in git, vedi nota licenza
 [Aa]ssets/[Ss]ynty*/
 [Aa]ssets/[Ss]ynty*.meta
+[Aa]ssets/[Ee]ditor*/
+[Aa]ssets/[Ee]ditor*.meta
+[Tt]extScriptsExport*/
+[Tt]extScriptsExport*.meta
 
 # OS
 .DS_Store

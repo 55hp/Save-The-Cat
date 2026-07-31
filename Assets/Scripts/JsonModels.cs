@@ -48,6 +48,7 @@ using System;
 {
     public string model;
     public ORMessage[] messages;
+    public int max_tokens;
 }
 
 [Serializable] public class ORChoice
@@ -59,6 +60,7 @@ using System;
 {
     public ORChoice[] choices;
 }
+
 
 
 
