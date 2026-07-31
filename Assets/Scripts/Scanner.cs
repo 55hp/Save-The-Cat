@@ -1,20 +1,32 @@
+using System.Collections;
 using UnityEngine;
 
 public class Scanner : MonoBehaviour
 {
     public static Scanner I;
 
-    public Transform player;
-    public Vector2 auraSize = new Vector2(3f, 2f);
+    CircleCollider2D scanCollider;
+    SpriteRenderer sr;
 
-    void Awake() { I = this; }
-    
-    /// <summary>
-    /// Activates the scanner, checking for objects within the defined aura size around the player. If any objects are detected, it retrieves their labels from the GameManager's translations and displays them using the FloatingLabel component.
-    /// </summary>
+    void Awake()
+    {
+        I = this;
+        scanCollider = GetComponent<CircleCollider2D>();
+        sr = GetComponent<SpriteRenderer>();
+        if (sr != null) sr.enabled = false; // spento finché non viene usato
+    }
+
     public void Activate()
     {
-        var hits = Physics2D.OverlapBoxAll(player.position, auraSize, 0f);
+        StartCoroutine(PulseAndReveal());
+    }
+
+    IEnumerator PulseAndReveal()
+    {
+        if (sr != null) sr.enabled = true;
+
+        float radius = scanCollider != null ? scanCollider.radius : 1.5f;
+        var hits = Physics2D.OverlapCircleAll(transform.position, radius);
         foreach (var h in hits)
         {
             var so = h.GetComponent<SceneObject>();
@@ -24,8 +36,11 @@ public class Scanner : MonoBehaviour
                 ? GameManager.I.translations[so.id]
                 : so.id;
 
-            var floatingLabel = h.GetComponent<FloatingLabel>();
-            if (floatingLabel != null) floatingLabel.Show(label);
+            var floatingLabel = h.GetComponent<WordLabel>();
+            if (floatingLabel != null) floatingLabel.Show();
         }
+
+        yield return new WaitForSeconds(0.4f);
+        if (sr != null) sr.enabled = false;
     }
 }

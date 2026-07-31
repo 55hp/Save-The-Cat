@@ -1,14 +1,9 @@
 using System.Collections;
+using System.Linq; // NUOVO
 using UnityEngine;
 
 public static class CommandExecutor
 {
-    /// <summary>
-    /// Executes a sequence of commands for the player character.
-    /// </summary>
-    /// <param name="commands"></param>
-    /// <param name="onComplete"></param>
-    /// <returns></returns>
     public static IEnumerator Run(Command[] commands, System.Action<bool, string> onComplete)
     {
         var player = GameManager.I.player;
@@ -22,7 +17,25 @@ public static class CommandExecutor
             {
                 case "WALK_TO":
                     if (target == null) { onComplete(false, "fail_not_found"); yield break; }
+
+                    // NUOVO — il fosso blocca il passaggio finché non c'è un ponte appoggiato sopra
+                    if (target.requiresDitchCrossing)
+                    {
+                        bool bridged = GameManager.I.sceneObjects.Any(o =>
+                            o.gameObject.activeInHierarchy && o.state == "placed_on_ditch");
+                        if (!bridged) { onComplete(false, "fail_ditch_blocks_path"); yield break; }
+                    }
+
                     yield return player.WalkTo(target.transform);
+
+                    // NUOVO — la corda si spezza al primo passaggio, una volta sola
+                    if (target.isTrap && !target.trapTriggered)
+                    {
+                        target.trapTriggered = true;
+                        target.gameObject.SetActive(false);
+                        onComplete(false, "fail_trap_triggered");
+                        yield break;
+                    }
                     break;
 
                 case "PICK_UP":
@@ -59,10 +72,6 @@ public static class CommandExecutor
         onComplete(true, "success");
     }
 
-    /// <summary>
-    /// Runs a predefined sequence of commands for debugging purposes, logging the result to the console.
-    /// </summary>
-    /// <param name="runner"></param>
     public static void DebugTestSequence(MonoBehaviour runner)
     {
         var testCommands = new[]

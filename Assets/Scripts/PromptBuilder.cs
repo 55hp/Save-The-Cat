@@ -1,11 +1,8 @@
+using System.Linq;
 using System.Text;
 
 public static class PromptBuilder
 {
-    /// <summary>
-    /// Builds the system prompt for the AI, including instructions, valid verbs, scene objects, and output rules.
-    /// </summary>
-    /// <returns></returns>
     public static string BuildSystemPrompt()
     {
         var sb = new StringBuilder();
@@ -36,15 +33,11 @@ public static class PromptBuilder
         return sb.ToString();
     }
 
-    /// <summary>
-    /// Builds a JSON representation of the current scene's objects, including their ids, colors, aliases, and states.
-    /// </summary>
-    /// <returns></returns>
     static string BuildSceneManifestJson()
     {
-        var objs = GameManager.I.sceneObjects;
-        var wrapper = new SceneManifestWrapper { objects = new SceneManifestObj[objs.Count] };
-        for (int i = 0; i < objs.Count; i++)
+        var objs = GameManager.I.sceneObjects.Where(o => o.gameObject.activeInHierarchy).ToArray();
+        var wrapper = new SceneManifestWrapper { objects = new SceneManifestObj[objs.Length] };
+        for (int i = 0; i < objs.Length; i++)
         {
             wrapper.objects[i] = new SceneManifestObj
             {

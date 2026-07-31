@@ -8,5 +8,13 @@ public class SceneObject : MonoBehaviour
     public string state = "on_ground";
     public string reachState = "ground"; // "ground" o "elevated"
 
-    void Start() { GameManager.I.RegisterObject(this); }
+    public bool isTrap = false;              // NUOVO — solo sulla corda
+    public bool trapTriggered = false;       // NUOVO — si spezza una volta sola
+    public bool requiresDitchCrossing = false;
+    
+    void Start()
+    {
+        if (!GameManager.I.sceneObjects.Contains(this))
+            Debug.LogWarning($"{name}: non è in level1Objects né level2Objects su GameManager — l'AI non lo vedrà mai.");
+    }
 }
