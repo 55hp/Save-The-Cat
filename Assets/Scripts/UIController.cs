@@ -89,4 +89,10 @@ public class UIController : MonoBehaviour
             gameFlow?.OnGameWon(); // vedi sotto
         }
     }
+    
+    public void ResetUI()
+    {
+        feedbackText.text = "";
+        inputField.text = "";
+    }
 }

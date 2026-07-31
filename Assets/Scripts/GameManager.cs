@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     public static string systemLanguage = "en"; // impostata una sola volta, al primo prompt
     public static bool languageLocked = false;
+    private Vector3 playerInitialPosition;
 
     public PlayerController player;
 
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         I = this;
+        playerInitialPosition = player.transform.position; // NUOVO
         foreach (var o in sceneObjects)
         {
             initialPositions[o] = o.transform.position;
@@ -40,6 +42,17 @@ public class GameManager : MonoBehaviour
         o.transform.SetParent(initialParents[o]);
         o.transform.position = initialPositions[o];
         o.state = "on_ground";
+        o.trapTriggered = false; // NUOVO
         o.gameObject.SetActive(true);
+    }
+    
+    public void ResetGame()
+    {
+        foreach (var o in sceneObjects)
+            ResetObject(o);
+
+        player.heldObject = null;
+        player.isElevated = false;
+        player.transform.position = playerInitialPosition;
     }
 }
