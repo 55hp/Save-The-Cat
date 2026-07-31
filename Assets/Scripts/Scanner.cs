@@ -40,7 +40,7 @@ public class Scanner : MonoBehaviour
             if (floatingLabel != null) floatingLabel.Show();
         }
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(5f);
         if (sr != null) sr.enabled = false;
     }
 }

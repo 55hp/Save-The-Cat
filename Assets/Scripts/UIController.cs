@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,8 +60,16 @@ public class UIController : MonoBehaviour
         }
 
         feedbackText.text = parsed.message;
-        if (!string.IsNullOrEmpty(parsed.language))
-            GameManager.I.detectedLanguage = parsed.language;
+        Debug.Log("Comandi ricevuti: " + string.Join(", ", parsed.commands.Select(c =>
+            $"{c.verb}({c.target}{(string.IsNullOrEmpty(c.target2) ? "" : "," + c.target2)})")));
+        
+        if (!string.IsNullOrEmpty(parsed.language) && !GameManager.languageLocked)
+        {
+            GameManager.systemLanguage = parsed.language;
+            GameManager.languageLocked = true;
+            StartCoroutine(TranslationClient.TranslateSceneObjects(GameManager.systemLanguage, () =>
+                Debug.Log("Lingua di sistema impostata: " + GameManager.systemLanguage)));
+        }
 
         yield return CommandExecutor.Run(parsed.commands, (success, reason) =>
         {
@@ -76,8 +85,8 @@ public class UIController : MonoBehaviour
         var cat = GameManager.I.FindObject("cat");
         if (cat != null && cat.state == "held")
         {
-            Debug.Log("Livello completato!");
-            gameFlow?.StartLevel2(); // sul Livello 2, gameFlow resta null: mostra qui uno schermo di fine gioco
+            Debug.Log("Hai salvato il gatto!");
+            gameFlow?.OnGameWon(); // vedi sotto
         }
     }
 }

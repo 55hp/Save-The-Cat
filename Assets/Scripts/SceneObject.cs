@@ -15,6 +15,6 @@ public class SceneObject : MonoBehaviour
     void Start()
     {
         if (!GameManager.I.sceneObjects.Contains(this))
-            Debug.LogWarning($"{name}: non è in level1Objects né level2Objects su GameManager — l'AI non lo vedrà mai.");
+            Debug.LogWarning($"{name}: non è in sceneObjects su GameManager — l'AI non lo vedrà mai.");
     }
 }

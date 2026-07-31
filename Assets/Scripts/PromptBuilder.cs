@@ -12,11 +12,11 @@ public static class PromptBuilder
         sb.AppendLine();
         sb.AppendLine("VALID VERBS:");
         sb.AppendLine("WALK_TO <target> - move next to an object");
-        sb.AppendLine("PICK_UP <target> - pick up an object, requires empty hands");
+        sb.AppendLine("PICK_UP <target> - pick up an object, requires empty hands AND being near the target (walk there first)");
         sb.AppendLine("DROP - drop whatever is held");
-        sb.AppendLine("PLACE <held> <target2> - place held object against target2");
-        sb.AppendLine("CLIMB <target> - climb an object, requires it to be placed against something");
-        sb.AppendLine("USE_SCANNER - reveal names of nearby objects (level 2 only)");
+        sb.AppendLine("PLACE <held> <target2> - place held object against target2, requires being near target2 (walk there first)");
+        sb.AppendLine("CLIMB <target> - climb an object, requires it to be placed against something AND being near the target (walk there first)");
+        sb.AppendLine("USE_SCANNER - reveal names of nearby objects");
         sb.AppendLine();
         sb.AppendLine("SCENE OBJECTS (JSON):");
         sb.AppendLine(BuildSceneManifestJson());

@@ -38,29 +38,35 @@ public static class CommandExecutor
                     }
                     break;
 
-                case "PICK_UP":
-                    if (target == null || !player.CanPickUp(target)) { onComplete(false, "fail_pickup"); yield break; }
-                    yield return player.PickUp(target);
-                    break;
-
                 case "DROP":
                     if (!player.CanDrop()) { onComplete(false, "fail_drop"); yield break; }
                     yield return player.Drop();
                     break;
 
+                case "PICK_UP":
+                    if (target == null) { onComplete(false, "fail_not_found"); yield break; }
+                    if (!player.IsNear(target)) { onComplete(false, "fail_too_far"); yield break; }
+                    if (!player.CanPickUp(target)) { onComplete(false, "fail_pickup"); yield break; }
+                    yield return player.PickUp(target);
+                    break;
+
                 case "PLACE":
-                    if (target2 == null || !player.CanPlace(target2)) { onComplete(false, "fail_place"); yield break; }
+                    if (target2 == null) { onComplete(false, "fail_not_found"); yield break; }
+                    if (!player.IsNear(target2)) { onComplete(false, "fail_too_far"); yield break; }
+                    if (!player.CanPlace(target2)) { onComplete(false, "fail_place"); yield break; }
                     yield return player.Place(target2.transform);
                     break;
 
                 case "CLIMB":
-                    if (target == null || !player.CanClimb(target)) { onComplete(false, "fail_climb"); yield break; }
+                    if (target == null) { onComplete(false, "fail_not_found"); yield break; }
+                    if (!player.IsNear(target)) { onComplete(false, "fail_too_far"); yield break; }
+                    if (!player.CanClimb(target)) { onComplete(false, "fail_climb"); yield break; }
                     yield return player.Climb(target.transform);
                     break;
 
                 case "USE_SCANNER":
                     Scanner.I.Activate();
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(1f);
                     break;
 
                 default:

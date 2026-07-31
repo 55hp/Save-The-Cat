@@ -9,6 +9,11 @@ public class PlayerController : MonoBehaviour
     public GameObject heldObject = null;
     public bool isElevated = false;
 
+    public float interactionRange = 1f; // quanto vicino serve essere per interagire — aggiustabile se sembra troppo severo/permissivo
+
+    public bool IsNear(SceneObject obj) =>
+        Vector2.Distance(transform.position, obj.transform.position) <= interactionRange;
+    
     public IEnumerator WalkTo(Transform target)
     {
         isElevated = false;

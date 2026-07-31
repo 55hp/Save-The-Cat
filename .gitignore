@@ -44,6 +44,9 @@ sysinfo.txt
 [Aa]ssets/[Ee]ditor*.meta
 [Tt]extScriptsExport*/
 [Tt]extScriptsExport*.meta
+[Tt]extMesh Pro*/
+[Tt]extMesh Pro*.meta
+
 
 # OS
 .DS_Store
