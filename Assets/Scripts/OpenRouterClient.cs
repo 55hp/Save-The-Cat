@@ -10,7 +10,6 @@ public class OpenRouterClient : MonoBehaviour
 
     const string URL = "https://openrouter.ai/api/v1/chat/completions";
 
-    public string apiKey;
     public string model = "anthropic/claude-haiku-4-5";
 
     void Awake() { I = this; }
@@ -42,7 +41,7 @@ public class OpenRouterClient : MonoBehaviour
             req.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
             req.downloadHandler = new DownloadHandlerBuffer();
             req.SetRequestHeader("Content-Type", "application/json");
-            req.SetRequestHeader("Authorization", "Bearer " + apiKey);
+            req.SetRequestHeader("Authorization", "Bearer " + ApiKeyContainer.ApiKey);
 
             yield return req.SendWebRequest();
 

@@ -13,9 +13,9 @@ public class CommandExecutorMono : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            CommandExecutor.DebugTestSequence(this);
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    CommandExecutor.DebugTestSequence(this);
+        //}
     }
 }
