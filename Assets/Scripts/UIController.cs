@@ -11,9 +11,25 @@ public class UIController : MonoBehaviour
     public Text feedbackText;
     public GameFlow gameFlow; // collega SOLO sulla UI del Livello 1, lascia vuoto sul Livello 2
 
+    public Dropdown modelDropdown; // assegna in Inspector
+
+    static readonly string[] modelSlugs = {
+        "anthropic/claude-haiku-4.5",
+        "anthropic/claude-sonnet-5",
+        "google/gemini-3.1-flash-lite"
+    };
+    
     void Start()
     {
         sendButton.onClick.AddListener(OnSend);
+        if (modelDropdown != null)
+            modelDropdown.onValueChanged.AddListener(OnModelChanged);
+    }
+
+    void OnModelChanged(int index)
+    {
+        OpenRouterClient.I.model = modelSlugs[index];
+        Debug.Log("Modello selezionato: " + modelSlugs[index]);
     }
 
     void OnSend()
