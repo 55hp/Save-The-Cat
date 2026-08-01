@@ -29,6 +29,7 @@ public static class PromptBuilder
         sb.AppendLine("\"commands\" must use ONLY the English verbs and object ids listed above — never translate them.");
         sb.AppendLine("\"message\" must be written in the SAME language the player used.");
         sb.AppendLine("\"language\" must be the ISO 639-1 code of the language the player used (e.g. \"it\", \"es\", \"sv\").");
+        sb.AppendLine("LOOK <target> - examine an object without touching it, get a vague playful description (no name reveal, that's what the scanner is for)");
 
         return sb.ToString();
     }

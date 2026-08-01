@@ -25,7 +25,9 @@ public class Scanner : MonoBehaviour
     {
         if (sr != null) sr.enabled = true;
 
-        float radius = scanCollider != null ? scanCollider.radius : 1.5f;
+        float localRadius = scanCollider != null ? scanCollider.radius : 1.5f;
+        float radius = localRadius * transform.lossyScale.x; // corregge la scala ereditata dal player
+
         var hits = Physics2D.OverlapCircleAll(transform.position, radius);
         foreach (var h in hits)
         {
@@ -36,7 +38,7 @@ public class Scanner : MonoBehaviour
                 ? GameManager.I.translations[so.id]
                 : so.id;
 
-            var floatingLabel = h.GetComponent<WordLabel>();
+            var floatingLabel = h.GetComponentInChildren<WordLabel>();
             if (floatingLabel != null) floatingLabel.Show();
         }
 

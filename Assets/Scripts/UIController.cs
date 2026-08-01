@@ -12,7 +12,8 @@ public class UIController : MonoBehaviour
     public GameFlow gameFlow; // collega SOLO sulla UI del Livello 1, lascia vuoto sul Livello 2
 
     public Dropdown modelDropdown; // assegna in Inspector
-
+    public Text debugText; // solo per te — MAI messaggi di gioco per il bambino
+    
     static readonly string[] modelSlugs = {
         "anthropic/claude-haiku-4.5",
         "anthropic/claude-sonnet-5",
@@ -29,6 +30,7 @@ public class UIController : MonoBehaviour
     void OnModelChanged(int index)
     {
         OpenRouterClient.I.model = modelSlugs[index];
+        if (debugText != null) debugText.text = "Modello: " + modelSlugs[index];
         Debug.Log("Modello selezionato: " + modelSlugs[index]);
     }
 
@@ -56,6 +58,7 @@ public class UIController : MonoBehaviour
         if (aiError != null)
         {
             Debug.LogError("Errore OpenRouter: " + aiError); // NUOVO
+            if (debugText != null) debugText.text = "Errore tecnico: " + aiError;
             feedbackText.text = "Il gatto si distrae per un attimo... riprova!";
             sendButton.interactable = true;
             yield break;
@@ -70,6 +73,7 @@ public class UIController : MonoBehaviour
         catch
         {
             Debug.LogError("Errore parsing JSON. Risposta raw: " + clean); // NUOVO
+            if (debugText != null) debugText.text = "Errore tecnico: " + clean;
             feedbackText.text = "Il gatto ti guarda confuso.";
             sendButton.interactable = true;
             yield break;

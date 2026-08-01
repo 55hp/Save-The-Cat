@@ -5,10 +5,9 @@ using System.Collections;
 public class WordLabel : MonoBehaviour
 {
     [SerializeField] string englishWord; // scritta a mano — deve coincidere con l'id dello SceneObject collegato
-    public TMP_Text label;               // il testo da mostrare, assegnalo tu
-    public Transform wordTransform;      // il transform che fluttua — di solito lo stesso oggetto del label
+    public TMP_Text label;               // assegnalo tu
 
-    public float showDuration = 2f;
+    public float showDuration = 4f;
     public float floatAmplitude = 0.15f;
     public float floatSpeed = 2f;
 
@@ -17,7 +16,7 @@ public class WordLabel : MonoBehaviour
 
     void Awake()
     {
-        if (wordTransform != null) basePosition = wordTransform.localPosition;
+        basePosition = transform.localPosition;
         if (label != null) label.enabled = false;
     }
 
@@ -39,16 +38,13 @@ public class WordLabel : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < showDuration)
         {
-            if (wordTransform != null)
-            {
-                float offsetY = Mathf.Sin(Time.time * floatSpeed) * floatAmplitude;
-                wordTransform.localPosition = basePosition + new Vector3(0f, offsetY, 0f);
-            }
+            float offsetY = Mathf.Sin(Time.time * floatSpeed) * floatAmplitude;
+            transform.localPosition = basePosition + new Vector3(0f, offsetY, 0f);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        if (wordTransform != null) wordTransform.localPosition = basePosition;
+        transform.localPosition = basePosition;
         if (label != null) label.enabled = false;
     }
 }

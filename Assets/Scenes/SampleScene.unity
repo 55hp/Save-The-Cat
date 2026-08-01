@@ -677,6 +677,10 @@ PrefabInstance:
       value: tree
       objectReference: {fileID: 0}
     - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
+      propertyPath: showDuration
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
       propertyPath: wordTransform
       value: 
       objectReference: {fileID: 649938673}
@@ -1515,6 +1519,10 @@ PrefabInstance:
     - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
       propertyPath: englishWord
       value: rope
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
+      propertyPath: showDuration
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
       propertyPath: wordTransform
@@ -2484,6 +2492,10 @@ PrefabInstance:
       value: parapet
       objectReference: {fileID: 0}
     - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
+      propertyPath: showDuration
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
       propertyPath: wordTransform
       value: 
       objectReference: {fileID: 533625919}
@@ -3241,6 +3253,10 @@ PrefabInstance:
     - target: {fileID: 4931591373422244221, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
+      propertyPath: showDuration
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
       propertyPath: wordTransform
@@ -4160,6 +4176,10 @@ PrefabInstance:
     - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
       propertyPath: englishWord
       value: cat
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
+      propertyPath: showDuration
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
       propertyPath: wordTransform
@@ -5931,6 +5951,7 @@ MonoBehaviour:
   feedbackText: {fileID: 1420378498}
   gameFlow: {fileID: 1325595633}
   modelDropdown: {fileID: 1876039457}
+  debugText: {fileID: 0}
 --- !u!1 &1326391567
 GameObject:
   m_ObjectHideFlags: 0
@@ -6290,6 +6311,10 @@ PrefabInstance:
     - target: {fileID: 4931591373422244221, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
+      propertyPath: showDuration
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
       propertyPath: wordTransform
@@ -7682,9 +7707,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.1057104, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.60571027
 --- !u!1 &1871464840
 GameObject:
   m_ObjectHideFlags: 0
@@ -8232,6 +8257,10 @@ PrefabInstance:
     - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
       propertyPath: englishWord
       value: ladder
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
+      propertyPath: showDuration
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
       propertyPath: wordTransform
@@ -8804,6 +8833,10 @@ PrefabInstance:
     - target: {fileID: 4931591373422244221, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
+      propertyPath: showDuration
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8620528955354571685, guid: a14b00c07aa8c10468db35504d848a43, type: 3}
       propertyPath: wordTransform

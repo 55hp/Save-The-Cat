@@ -63,6 +63,10 @@ public static class CommandExecutor
                     if (!player.CanClimb(target)) { onComplete(false, "fail_climb"); yield break; }
                     yield return player.Climb(target.transform);
                     break;
+                
+                case "LOOK":
+                    yield return new WaitForSeconds(0.3f);
+                    break;
 
                 case "USE_SCANNER":
                     Scanner.I.Activate();
